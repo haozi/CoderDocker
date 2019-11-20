@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build": "sh build.sh",
+    "deploy": "sh deploy.sh",
     "start": "sh start.sh"
   }
 }
