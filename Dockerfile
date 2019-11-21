@@ -10,6 +10,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash && sudo apt-ge
 
 COPY ./.zshrc /home/coder
 RUN mkdir -p ${HOME}/.local/share && \
+    mkdir -p ${HOME}/.cache && \
     sudo chown -R coder:coder ${HOME}/.* && \
     yarn config set registry https://registry.npm.taobao.org && \
     git config --global alias.co checkout && \
@@ -17,4 +18,5 @@ RUN mkdir -p ${HOME}/.local/share && \
     git config --global alias.ci commit && \
     git config --global alias.st status && \
     sudo ln -s ${HOME}/project /Workspcace && \
-    sudo chmod -R 777 /Workspcace
+    sudo chmod -R 777 /Workspcace ${HOME}/.cache
+CMD ["/bin/zsh"]
