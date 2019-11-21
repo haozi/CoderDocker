@@ -8,7 +8,10 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash && sudo apt-ge
     sudo npm install -g yarn --registry=https://registry.npm.taobao.org && \
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | sudo -E zsh
 
-COPY ./.zshrc /home/coder
+COPY ./.zshrc /home/coder/.zshrc
+COPY ./code-server/User/settings.json /home/coder/.local/share/code-server/User/settings.json
+COPY ./code-server/languagepacks.json /home/coder/.local/share/code-server/languagepacks.json
+
 RUN mkdir -p ${HOME}/.local/share && \
     mkdir -p ${HOME}/.cache && \
     sudo chown -R coder:coder ${HOME}/.* && \
@@ -19,4 +22,5 @@ RUN mkdir -p ${HOME}/.local/share && \
     git config --global alias.st status && \
     sudo ln -s ${HOME}/project /Workspcace && \
     sudo chmod -R 777 /Workspcace ${HOME}/.cache
+
 CMD ["/bin/zsh"]
