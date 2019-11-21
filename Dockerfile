@@ -1,22 +1,20 @@
 FROM codercom/code-server:v2
 
-ENV NODE_VERSION=12
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.1/install.sh | bash && \
-    sudo apt-get update && sudo apt-get install -y \
-      zsh autojump && \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash && sudo apt-get install -y \
+    nodejs zsh autojump && \
+    sudo apt-get clean && \
     sudo chsh -s /bin/zsh && \
-    sudo wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true \
-    apt-get clean
+    sudo wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true && \
+    sudo npm install -g yarn --registry=https://registry.npm.taobao.org && \
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | sudo -E zsh
 
-RUN git config --global alias.co checkout && \
+COPY ./.zshrc /home/coder
+RUN mkdir -p ${HOME}/.local/share && \
+    sudo chown -R coder:coder ${HOME}/.* && \
+    yarn config set registry https://registry.npm.taobao.org && \
+    git config --global alias.co checkout && \
     git config --global alias.br branch && \
     git config --global alias.ci commit && \
     git config --global alias.st status && \
-    mkdir -p ${HOME}/.local/share && \
-    chmod -R 777 ${HOME}/.local/share && \
-    sudo chown -R coder:coder ${HOME}/.local ${HOME}/.wget-hsts ${HOME}/.zshrc
-RUN mkdir "${HOME}/.npm-packages" && /bin/zsh -c '. ~/.zshrc'
-# RUN npm install -g yarn --registry=https://registry.npm.taobao.org
-COPY ./.zshrc /home/coder
-RUN sudo ln -s ${HOME}/project /Workspcace
-RUN sudo chmod -R 777 /Workspcace
+    sudo ln -s ${HOME}/project /Workspcace && \
+    sudo chmod -R 777 /Workspcace
