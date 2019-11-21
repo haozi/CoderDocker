@@ -20,7 +20,7 @@ RUN mkdir -p ${HOME}/.local/share && \
     git config --global alias.br branch && \
     git config --global alias.ci commit && \
     git config --global alias.st status && \
-    sudo ln -s ${HOME}/project /Workspcace && \
-    sudo chmod -R 777 /Workspcace ${HOME}/.cache
+    sudo ln -s ${HOME}/project /Workspace && \
+    sudo chmod -R 777 /Workspace ${HOME}/.cache
 
 CMD ["/bin/zsh"]
