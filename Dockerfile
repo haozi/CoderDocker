@@ -1,12 +1,14 @@
 FROM codercom/code-server:v2
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash && sudo apt-get install -y \
-    nodejs zsh autojump && \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash && \
+    sudo apt-get install -y nodejs zsh autojump && \
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
+    sudo ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     sudo apt-get clean && \
     sudo chsh -s /bin/zsh && \
-    sudo wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true && \
+    curl -sL  https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sudo -E bash || true && \
     sudo npm install -g yarn --registry=https://registry.npm.taobao.org && \
-    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | sudo -E zsh
+    curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 
 COPY ./.zshrc /home/coder/.zshrc
 COPY ./code-server/User/settings.json /home/coder/.local/share/code-server/User/settings.json
