@@ -1,11 +1,13 @@
 {
+  "debug.console.fontSize": 14,
   "editor.fontFamily": "Monaco, Menlo, 'Courier New', monospace, CSS Mono",
+  "editor.fontSize": 14,
+  "editor.renderWhitespace": "selection",
   "editor.tabSize": 2,
-  "files.trimTrailingWhitespace": true,
   "files.autoSave": "onFocusChange",
   "files.eol": "\n",
-  "terminal.integrated.shell.linux": "/bin/zsh",
-  "editor.fontSize": 14,
-  "debug.console.fontSize": 14,
-  "terminal.integrated.fontSize": 14
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.shell.linux": "/bin/zsh"
 }

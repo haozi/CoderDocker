@@ -12,6 +12,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash && \
 
 COPY ./.zshrc /home/coder/.zshrc
 COPY ./code-server/User/settings.json /home/coder/.local/share/code-server/User/settings.json
+COPY ./code-server/User/keybindings.json /home/coder/.local/share/code-server/User/keybindings.json
 COPY ./code-server/languagepacks.json /home/coder/.local/share/code-server/languagepacks.json
 
 RUN mkdir -p ${HOME}/.local/share && \
